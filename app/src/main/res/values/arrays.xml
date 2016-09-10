@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cuci">
+        <item>Cuci Kering</item>
+        <item>Cuci Setrika</item>
+        <item>Setrika</item>
+        <item>Dry Clean</item>
+    </string-array>
+</resources>
