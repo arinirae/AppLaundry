@@ -47,52 +47,110 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doProcess() {
+        if (isValid()) {
+            String nama = etNama.getText().toString();
+            String alamat = etAlamat.getText().toString();
+            String telp = etTelp.getText().toString();
+            String tgl = etTgl.getText().toString();
+            String hasil = null;
 
-        String nama = etNama.getText().toString();
-        String alamat = etAlamat.getText().toString();
-        String telp = etTelp.getText().toString();
-        String tgl = etTgl.getText().toString();
-        String hasil = null;
-
-        if (rgBayar.getCheckedRadioButtonId() != -1) {
-            RadioButton rb = (RadioButton) findViewById(rgBayar.getCheckedRadioButtonId());
-            hasil = rb.getText().toString();
-        }
-        if (hasil == null) {
-            tvHasil.setText("Belum memilih Metode Pembayaran");
-        } else {
-            String cuci = spCuci.getSelectedItem().toString();
-            String hasil1 = "Barang yang di laundry :\n";
-            String akhir = "Nama : " + nama + "\n"
-                    + "Alamat : " + alamat + "\n"
-                    + "Telp : " + telp + "\n"
-                    + "Tanggal : " + tgl + "\n" + "\n";
-            String akhir2 = "\n" + "Jenis Laundry : " + cuci + "\n"
-                    + "Pembayaran : " + hasil;
+            if (rgBayar.getCheckedRadioButtonId() != -1) {
+                RadioButton rb = (RadioButton) findViewById(rgBayar.getCheckedRadioButtonId());
+                hasil = rb.getText().toString();
+            }
+            if (hasil == null) {
+                tvHasil.setText("Belum memilih Metode Pembayaran");
+            } else {
+                String cuci = spCuci.getSelectedItem().toString();
+                String hasil1 = "Barang yang di laundry :\n";
+                String akhir = "Nama : " + nama + "\n"
+                        + "Alamat : " + alamat + "\n"
+                        + "Telp : " + telp + "\n"
+                        + "Tanggal : " + tgl + "\n" + "\n";
+                String akhir2 = "\n" + "Jenis Laundry : " + cuci + "\n"
+                        + "Pembayaran : " + hasil;
                 /*int startlen = hasil1.length();*/
 
 
-            if (cbKarpet.isChecked())
-                hasil1 += cbKarpet.getText() + "\n";
-            tvHasil.setText(akhir + hasil1 + akhir2);
+                if (cbKarpet.isChecked())
+                    hasil1 += cbKarpet.getText() + "\n";
+                tvHasil.setText(akhir + hasil1 + akhir2);
 
-            if (cbBaju.isChecked())
-                hasil1 += cbBaju.getText() + "\n";
-            tvHasil.setText(akhir + hasil1 + akhir2);
+                if (cbBaju.isChecked())
+                    hasil1 += cbBaju.getText() + "\n";
+                tvHasil.setText(akhir + hasil1 + akhir2);
 
-            if (cbBawahan.isChecked())
-                hasil1 += cbBawahan.getText() + "\n";
-            tvHasil.setText(akhir + hasil1 + akhir2);
+                if (cbBawahan.isChecked())
+                    hasil1 += cbBawahan.getText() + "\n";
+                tvHasil.setText(akhir + hasil1 + akhir2);
 
-            if (cbSprei.isChecked())
-                hasil1 += cbSprei.getText() + "\n";
-            tvHasil.setText(akhir + hasil1 + akhir2);
+                if (cbSprei.isChecked())
+                    hasil1 += cbSprei.getText() + "\n";
+                tvHasil.setText(akhir + hasil1 + akhir2);
 
                 /*if(hasil1.length()==startlen){
                     hasil1+="Belum ada pilihan";
                     tvHasil.setText(hasil1);}*/
 
+            }
         }
+    }
+
+    private boolean isValid() {
+        boolean valid = true;
+
+        String nama = etNama.getText().toString();
+        String alamat = etAlamat.getText().toString();
+        String telp = etTelp.getText().toString();
+        String tgl = etTgl.getText().toString();
+
+        /*String hasil1 = "Barang yang di laundry :\n";
+        int startlen = hasil1.length();
+*/
+        if (nama.isEmpty()) {
+            etNama.setError("Nama belum diisi");
+            valid = false;
+        } else if (nama.length() > 20) {
+            etNama.setError("Nama maksimal 20 karakter");
+            valid = false;
+        } else {
+            etNama.setError(null);
+        }
+
+        if (alamat.isEmpty()) {
+            etAlamat.setError("Alamat belum diisi");
+            valid = false;
+        } else if (alamat.length() > 30) {
+            etAlamat.setError("Alamat maksimal 30 karakter");
+            valid = false;
+        } else {
+            etAlamat.setError(null);
+        }
+
+        if (telp.isEmpty()) {
+            etTelp.setError("Telepon belum diisi");
+            valid = false;
+        } else if (telp.length() < 12) {
+            etTelp.setError("Telepon maksimal 12 karakter");
+            valid = false;
+        } else {
+            etTelp.setError(null);
+        }
+
+        if (tgl.isEmpty()) {
+            etTgl.setError("Tanggal belum diisi");
+            valid = false;
+        } else {
+            etTgl.setError(null);
+        }
+
+        /*if(hasil1.length()==startlen)
+            hasil1+="Belum ada pilihan";
+            tvHasil.setText(hasil1);
+*/
+
+        return valid;
+
     }
 }
 
